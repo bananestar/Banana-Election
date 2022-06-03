@@ -4,8 +4,27 @@
  * Copyright (c) 2022 Simon Vander Linden
  */
 
+:root {
+  --color-main: white;
+}
 
- body{
-     background: no-repeat url('../img/cinema.jpg');
-     background-size: cover;
- }
+body {
+  margin: 0;
+  box-sizing: border-box;
+  background: no-repeat url("../img/cinema.jpg");
+  background-size: cover;
+}
+
+.container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: var(--color-main);
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.box {
+  text-align: center;
+}
