@@ -80,7 +80,8 @@ function addUser() {
     containerUserEl.appendChild(articleEl);
     articleEl.appendChild(divEl);
     btnRemoveEl.appendChild(btnRemoveValue);
-    divEl.appendChild(titleEl, btnRemoveEl);
+    divEl.appendChild(titleEl);
+    divEl.appendChild(btnRemoveEl);
     titleEl.appendChild(nameEl);
   }
   checker(false);
@@ -101,13 +102,27 @@ function userName() {
 
     // multi user
     if (name.match(regex)) {
-      nbUser = 1;
+      let nbUser = 1;
+      let str = 2;
+
       users.forEach((e) => {
-        if (name.toLowerCase() == e.name.toLowerCase()) {
+        switch (nbUser) {
+          case 10:
+            str = 3;
+            break;
+          case 100:
+            str = 4;
+            break;
+          case 1000:
+            str = 5;
+            break;
+        }
+        if (name.toLowerCase() == e.name.substring(str).toLowerCase()) {
           nbUser++;
-          name = name + nbUser;
         }
       });
+      name = nbUser + " " + name;
+      break;
     }
   } while (!name.match(regex));
 
@@ -203,7 +218,7 @@ function animateUser() {
     const titleWinnerEl = document.createElement("h3");
     titleWinnerEl.classList.add("RightToLeft");
     titleWinnerEl.textContent = `Félicitation ${userChoosed}, tu es l'élu!!`;
-    messageWinner.append(titleWinnerEl);
+    WinMessageEl.append(titleWinnerEl);
   }
 }
 
@@ -232,10 +247,9 @@ function btnDisabled() {
   btnStopEl.style.display = "none";
 }
 
-
 function reset() {
-  resetGame()
-  checker()
+  resetGame();
+  checker();
 }
 
 function resetGame(params) {
@@ -256,20 +270,20 @@ function resetGame(params) {
 }
 
 function stopGame() {
-  resetGame()
+  resetGame();
   btnAddUserEl.style.display = null;
   btnAddUserEl.classList.add("btn", "btn-green");
   btnAddUserEl.removeAttribute("disabled");
-    btnPlayEl.classList.add("btn", "btn-red");
-    btnPlayEl.removeAttribute("disabled");
+  btnPlayEl.classList.add("btn", "btn-red");
+  btnPlayEl.removeAttribute("disabled");
 
-    disableRetryAndStop();
+  disableRetryAndStop();
 
-    const allBtn = document.querySelectorAll("article button");
-    for (let i = 0; i < allBtn.length; i++) {
-      allBtn[i].classList.add("btn", "btn-red");
-      allBtn[i].removeAttribute("disabled");
-    }
+  const allBtn = document.querySelectorAll("article button");
+  for (let i = 0; i < allBtn.length; i++) {
+    allBtn[i].classList.add("btn", "btn-red");
+    allBtn[i].removeAttribute("disabled");
+  }
 }
 
 function disableRetryAndStop() {

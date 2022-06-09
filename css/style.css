@@ -50,7 +50,7 @@ body {
   align-items: center;
 }
 
-#beforeStartContainer {
+#starterContainer {
   width: 80%;
   text-align: center;
   background-color: rgba(0, 0, 0, 0.609);
@@ -58,7 +58,7 @@ body {
   padding: 40px 0px;
 }
 
-#addPerson:hover {
+#addUser:hover {
   cursor: pointer;
 }
 
@@ -78,7 +78,7 @@ h4 {
   text-align: center;
 }
 
-#beforeStartContainer > h1 {
+#starterContainer > h1 {
   font-size: 50px;
 }
 
@@ -91,7 +91,7 @@ h4 {
 
 /*Cards*/
 
-#containerOfCards{
+#containerUser{
   background-color: rgb(0, 0, 0, 0.6);
   padding: 40px 0px;
   display: flex;
@@ -124,7 +124,7 @@ h4 {
 }
 
 /*Color for animation random*/
-.catchPlayer{
+.catchUser{
   background-color: gold;
   box-shadow: 0px 0px 10px gold;
   transition: 0.3s;
@@ -132,23 +132,23 @@ h4 {
 
 /*Buttons*/
 
-#addPerson {
+#addUser {
   font-size: 50px;
   font-weight: bold;
   background-color: green;
 }
 
-#addPerson:hover{
+#addUser:hover{
   cursor: pointer;
   background-color: gold;
   box-shadow: 0px 0px 5px gold;
 }
 
-#btnsForGames {
+#btnGroupe {
   text-align: center;
 }
 
-#btnsForGames > button {
+#btnGroupe > button {
   font-size: 25px;
   padding: 10px;
   margin-top: 10px;
@@ -194,7 +194,7 @@ h4 {
 
 /*Animation message for winner*/
 
-#winnerMessage{
+#WinMessage{
   font-size: 25px;
 }
 
