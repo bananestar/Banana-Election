@@ -20,7 +20,13 @@
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
     <!-- fontawesome CSS -->
-    <link rel="stylesheet" href="css/fontawesome.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+      integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <!-- Bootstrap CSS -->
     <link
       rel="stylesheet"
@@ -32,11 +38,30 @@
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
-    <div class="container">
-      <div class="box" id="box">
-        <h1>Qui sera l'élu?</h1>
-        
-        <button type="button" class="btn btn-primary" id="start">Start</button>
+    <div id="starterContainer">
+      <h1>Qui sera l'élu?</h1>
+      <button id="startButton" class="btn btn-red">Commencer</button>
+    </div>
+
+    <div id="listUser">
+      <div id="WinMessage"></div>
+      <div>
+        <h1>Insérez au moins deux joueurs pour débuter</h1>
+        <div id="containerUser">
+          <!--Exemple de ce que donne l'article-->
+                <!--<article class="card">
+                    <div class="content">
+                      <h4>John Doe</h4> 
+                      <button class="btn btn-red">-</button>
+                    </div>
+                </article>-->
+        </div>
+        <div id="btnGroupe">
+          <button id="addUser" class="btn btn-green"><i class="fa-solid fa-plus"></i></button>
+          <button id="play" class="btn btn-red"><i class="fa-solid fa-play"></i></button>
+          <button id="reset" class="btn btn-green"><i class="fa-solid fa-arrow-rotate-left"></i></button>
+          <button id="stop" class="btn btn-red"><i class="fa-solid fa-stop"></i></button>
+        </div>
       </div>
     </div>
 
@@ -58,6 +83,6 @@
       crossorigin="anonymous"
     ></script>
     <!-- JS MAIN -->
-    <script src="js/apps.js"></script>
+    <script type="text/javascript" src="js/apps.js"></script>
   </body>
 </html>

@@ -4,7 +4,7 @@
  * Copyright (c) 2022 Simon Vander Linden
  */
 
-:root {
+/* :root {
   --color-main: white;
 }
 
@@ -27,4 +27,178 @@ body {
 
 .box {
   text-align: center;
+}
+
+.btnUser{
+  border: solid 1px black;
+}
+
+.btnFlash{
+  color: black;
+  background-color: white;
+} */
+
+body {
+  margin: 0px;
+  background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.48)), url("../img/cinema.jpg");
+  background-repeat: no-repeat;
+  background-color: transparent;
+  background-size: cover;
+  overflow-x: hidden;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
+#beforeStartContainer {
+  width: 80%;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.609);
+  width: 100vw;
+  padding: 40px 0px;
+}
+
+#addPerson:hover {
+  cursor: pointer;
+}
+
+h1 {
+  color: white;
+  text-align: center;
+  padding: 10px 0px;
+}
+
+h3{
+  color: white;
+  min-width: 100%;
+}
+
+h4 {
+  font-weight: bold;
+  text-align: center;
+}
+
+#beforeStartContainer > h1 {
+  font-size: 50px;
+}
+
+/*Before starting*/
+
+#startButton {
+  font-size: 30px;
+  padding: 10px;
+}
+
+/*Cards*/
+
+#containerOfCards{
+  background-color: rgb(0, 0, 0, 0.6);
+  padding: 40px 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  min-height: 100px;
+  width: 100vw;
+}
+
+.card > .content > button{
+  width: 100%;
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.card {
+  background-color: white;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  width: 20%;
+  margin: 10px;
+  border-radius: 3px;
+  transition: 0.3s;
+
+}
+
+.content {
+  padding: 2px 16px;
+}
+
+/*Color for animation random*/
+.catchPlayer{
+  background-color: gold;
+  box-shadow: 0px 0px 10px gold;
+  transition: 0.3s;
+}
+
+/*Buttons*/
+
+#addPerson {
+  font-size: 50px;
+  font-weight: bold;
+  background-color: green;
+}
+
+#addPerson:hover{
+  cursor: pointer;
+  background-color: gold;
+  box-shadow: 0px 0px 5px gold;
+}
+
+#btnsForGames {
+  text-align: center;
+}
+
+#btnsForGames > button {
+  font-size: 25px;
+  padding: 10px;
+  margin-top: 10px;
+  min-width: 100px;
+}
+
+#play:disabled {
+  border-radius: 5px;
+  border: none;
+  cursor:auto;
+  box-shadow: none;
+}
+
+.btn{
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+
+.btn-red{
+  background-color: red;
+}
+
+.btn:hover{
+  cursor: pointer;
+  background-color: gold;
+  transition: 0.3s;
+  box-shadow: 0px 0px 5px gold;
+}
+
+.btn-green{
+  background-color: green;
+}
+
+/*animation*/
+.RightToLeft{
+  position: relative;
+  top: 10%;
+  animation: run infinite;
+  animation-duration: 20s;
+  animation-timing-function: linear;
+}
+
+/*Animation message for winner*/
+
+#winnerMessage{
+  font-size: 25px;
+}
+
+@keyframes run {
+  0% {left: 101vw;}
+  100% {left: -50vw;}
 }
