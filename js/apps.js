@@ -20,7 +20,7 @@ const messageUserEl = document.getElementById("messageWarning");
 
 let users = [];
 let usersTemp = [];
-let usersLength = [];
+let usersLength;
 let gameSelect = 0;
 let classementIndex = 0;
 let minUser = 2;
@@ -210,6 +210,9 @@ function beginTheGame() {
   btnResetEl.style.display = null;
   btnStopEl.style.display = null;
 
+  btnElectionEl.disabled = true;
+  btnClassementEl.disabled = true;
+
   for (let i = 0; i < allBtn.length; i++) {
     allBtn[i].classList.remove("btn", "btn-red", "btn-green");
     allBtn[i].disabled = true;
@@ -238,7 +241,6 @@ function choosingMultiUser() {
   const articleSelected = document.getElementById(userSelected);
   articleSelected.classList.add(catchUser);
 
-  console.log(usersTemp.length);
   if (usersTemp.length != 1) {
     if (time > limitTime) {
       userChoosed = userSelected;
@@ -250,10 +252,6 @@ function choosingMultiUser() {
     const trophyEl = new Image(60, 80);
     trophyEl.src = "../img/Trophy_gold.png";
     articleSelected.children[0].appendChild(trophyEl);
-
-    btnElectionEl.removeAttribute("disabled");
-
-    btnClassementEl.removeAttribute("disabled");
 
     btnResetEl.removeAttribute("disabled");
     btnResetEl.classList.add("btn", "btn-green");
@@ -426,13 +424,15 @@ function resetGame() {
     );
 
     for (let i = 0; i < removeReward.length; i++) {
-      console.log(removeReward[i].lastChild);
       removeReward[i].lastChild.remove();
     }
   }
   counterLoopAnimation = 0;
   time = 2;
   userChoosed = null;
+
+  btnElectionEl.removeAttribute("disabled");
+  btnClassementEl.removeAttribute("disabled");
 }
 
 function stopGame() {
