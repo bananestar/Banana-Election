@@ -14,7 +14,16 @@ const containerUserEl = document.getElementById("containerUser");
 const listUserEl = document.getElementById("listUser");
 const WinMessageEl = document.getElementById("WinMessage");
 
+const btnElectionEl = document.getElementById("election");
+const btnClassementEl = document.getElementById("classement");
+const messageUserEl = document.getElementById("messageWarning");
+
 let users = [];
+let usersTemp = [];
+let usersLength = [];
+let gameSelect = 0;
+let classementIndex = 0;
+let minUser = 2;
 let time = 2;
 let limitTime = 350;
 let counterLoopAnimation = 0;
@@ -31,6 +40,14 @@ checker(false);
 document.addEventListener("DOMContentLoaded", function () {
   btnEl.addEventListener("click", function () {
     loadGame();
+  });
+
+  btnElectionEl.addEventListener("click", function () {
+    selectGame(1);
+  });
+
+  btnClassementEl.addEventListener("click", function () {
+    selectGame(2);
   });
 
   btnAddUserEl.addEventListener("click", function () {
@@ -51,12 +68,39 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
+function selectGame(game) {
+  const h1MessageEl = document.createElement("h1");
+  switch (game) {
+    case 1:
+      gameSelect = 1;
+      minUser = 2;
+      btnAddUserEl.disabled = false;
+      btnAddUserEl.classList.add("btn", "btn-green");
+      h1MessageEl.textContent = "Insérez au moins deux joueurs pour débuter";
+      messageUserEl.textContent = "";
+      messageUserEl.appendChild(h1MessageEl);
+      break;
+
+    case 2:
+      gameSelect = 2;
+      minUser = 3;
+      btnAddUserEl.disabled = false;
+      btnAddUserEl.classList.add("btn", "btn-green");
+      h1MessageEl.textContent = "Insérez au moins trois joueurs pour débuter";
+      messageUserEl.textContent = "";
+      messageUserEl.appendChild(h1MessageEl);
+      break;
+  }
+}
+
 // Add User
 function addUser() {
   let name = userName();
 
   if (name != null) {
     users.push({ name: name });
+    usersTemp.push({ name: name });
+    usersLength = users.length;
 
     const articleEl = document.createElement("article");
     articleEl.classList.add("card");
@@ -139,12 +183,17 @@ function loadGame() {
 
 // check btn for begin game
 function checker(wantToPlay = true) {
-  if (users.length >= 2) {
+  if (users.length >= minUser) {
     btnPlayEl.disabled = false;
     btnPlayEl.classList.add("btn", "btn-red");
   } else {
     btnPlayEl.removeAttribute("class");
     btnPlayEl.disabled = true;
+
+    if (gameSelect == 0) {
+      btnAddUserEl.disabled = true;
+      btnAddUserEl.removeAttribute("class");
+    }
   }
 
   if (wantToPlay && !btnPlayEl.disabled) {
@@ -165,12 +214,53 @@ function beginTheGame() {
     allBtn[i].classList.remove("btn", "btn-red", "btn-green");
     allBtn[i].disabled = true;
   }
-  choosingUser();
+  if (gameSelect === 1) {
+    choosingUser();
+  } else if (gameSelect === 2) {
+    choosingMultiUser();
+  }
 }
 
 // time addition
 function addTime() {
   return (time = time * 1.1);
+}
+
+function choosingMultiUser() {
+  const userAlreadySelected = document.getElementsByClassName(catchUser);
+
+  if (userAlreadySelected[0] != undefined) {
+    userAlreadySelected[0].classList.remove(catchUser);
+  }
+
+  let nbIndex = Math.floor(Math.random() * usersTemp.length);
+  const userSelected = usersTemp[nbIndex].name;
+  const articleSelected = document.getElementById(userSelected);
+  articleSelected.classList.add(catchUser);
+
+  console.log(usersTemp.length);
+  if (usersTemp.length != 1) {
+    if (time > limitTime) {
+      userChoosed = userSelected;
+      intervalChoosed = setInterval(animateUser, 500);
+    } else {
+      setTimeout(choosingMultiUser, addTime());
+    }
+  } else {
+    const trophyEl = new Image(60, 80);
+    trophyEl.src = "../img/Trophy_gold.png";
+    articleSelected.children[0].appendChild(trophyEl);
+
+    btnElectionEl.removeAttribute("disabled");
+
+    btnClassementEl.removeAttribute("disabled");
+
+    btnResetEl.removeAttribute("disabled");
+    btnResetEl.classList.add("btn", "btn-green");
+
+    btnStopEl.removeAttribute("disabled");
+    btnStopEl.classList.add("btn", "btn-red");
+  }
 }
 
 //random User
@@ -197,28 +287,86 @@ function choosingUser() {
 //animation carrousel
 function animateUser() {
   const userSelected = document.getElementById(userChoosed);
-  const classOfUser = document.getElementsByClassName(catchUser);
+  let classOfUser;
+  switch (gameSelect) {
+    case 1:
+      classOfUser = document.getElementsByClassName(catchUser);
+      if (counterLoopAnimation < 6) {
+        if (classOfUser[0] != undefined) {
+          userSelected.classList.remove(catchUser);
+        } else {
+          userSelected.classList.add(catchUser);
+        }
 
-  if (counterLoopAnimation < 6) {
-    if (classOfUser[0] != undefined) {
-      userSelected.classList.remove(catchUser);
-    } else {
-      userSelected.classList.add(catchUser);
-    }
+        counterLoopAnimation++;
+      } else {
+        clearInterval(intervalChoosed);
+        btnElectionEl.removeAttribute("disabled");
+        btnClassementEl.removeAttribute("disabled");
 
-    counterLoopAnimation++;
-  } else {
-    clearInterval(intervalChoosed);
-    btnResetEl.removeAttribute("disabled");
-    btnResetEl.classList.add("btn", "btn-green");
+        btnResetEl.removeAttribute("disabled");
+        btnResetEl.classList.add("btn", "btn-green");
 
-    btnStopEl.removeAttribute("disabled");
-    btnStopEl.classList.add("btn", "btn-red");
+        btnStopEl.removeAttribute("disabled");
+        btnStopEl.classList.add("btn", "btn-red");
 
-    const titleWinnerEl = document.createElement("h3");
-    titleWinnerEl.classList.add("RightToLeft");
-    titleWinnerEl.textContent = `Félicitation ${userChoosed}, tu es l'élu!!`;
-    WinMessageEl.append(titleWinnerEl);
+        const titleWinnerEl = document.createElement("h3");
+        titleWinnerEl.classList.add("RightToLeft");
+        titleWinnerEl.textContent = `Félicitation ${userChoosed}, tu es l'élu!!`;
+        WinMessageEl.append(titleWinnerEl);
+      }
+      break;
+    case 2:
+      classOfUser = document.getElementsByClassName(catchUser);
+      if (counterLoopAnimation < 4) {
+        if (classOfUser[0] != undefined) {
+          userSelected.classList.remove(catchUser);
+        } else {
+          userSelected.classList.add(catchUser);
+        }
+
+        counterLoopAnimation++;
+      } else {
+        clearInterval(intervalChoosed);
+
+        userSelected.classList.add("catchUserMulti");
+
+        indexUser = usersTemp
+          .map(function (e) {
+            return e.name;
+          })
+          .indexOf(userChoosed);
+
+        usersTemp.splice(indexUser, 1);
+
+        let nbClassement = usersLength - classementIndex;
+        let trophyEl;
+
+        switch (nbClassement) {
+          case 2:
+            trophyEl = new Image(60, 80);
+            trophyEl.src = "../img/Trophy_silver.png";
+            userSelected.children[0].appendChild(trophyEl);
+            break;
+          case 3:
+            trophyEl = new Image(60, 80);
+            trophyEl.src = "../img/Trophy_bronze.png";
+            userSelected.children[0].appendChild(trophyEl);
+            break;
+          default:
+            nbEl = document.createElement("span");
+            nbEl.textContent = "numéro :" + nbClassement;
+            userSelected.children[0].appendChild(nbEl);
+            break;
+        }
+        classementIndex++;
+
+        counterLoopAnimation = 0;
+        time = 2;
+
+        choosingMultiUser();
+      }
+      break;
   }
 }
 
@@ -252,7 +400,7 @@ function reset() {
   checker();
 }
 
-function resetGame(params) {
+function resetGame() {
   const userAlreadySelected = document.getElementsByClassName(catchUser);
   const messageAnimated = document.getElementsByClassName("RightToLeft");
 
@@ -264,6 +412,24 @@ function resetGame(params) {
     messageAnimated[0].remove();
   }
 
+  if (gameSelect === 2) {
+    usersTemp = [];
+    for (let i = 0; i < users.length; i++) {
+      usersTemp.push({ name: users[i].name });
+    }
+    classementIndex = 0;
+    const catchUserMultiRemover = document.querySelectorAll(".card");
+    const removeReward = document.getElementsByClassName("content");
+
+    catchUserMultiRemover.forEach((el) =>
+      el.classList.remove("catchUserMulti")
+    );
+
+    for (let i = 0; i < removeReward.length; i++) {
+      console.log(removeReward[i].lastChild);
+      removeReward[i].lastChild.remove();
+    }
+  }
   counterLoopAnimation = 0;
   time = 2;
   userChoosed = null;

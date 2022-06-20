@@ -46,19 +46,28 @@
     <div id="listUser">
       <div id="WinMessage"></div>
       <div>
-        <h1>Insérez au moins deux joueurs pour débuter</h1>
+        <!-- <h1>Insérez au moins deux joueurs pour débuter</h1> -->
+        <div id="btnGroupeGameSelect">
+          <button type="button" id="election" class="btn btn-select-game">
+            Election
+          </button>
+          <button type="button" id="classement" class="btn btn-select-game">
+            Classement
+          </button>
+        </div>
         <div id="containerUser"></div>
+        <div id="messageWarning"></div>
         <div id="btnGroupe">
-          <button id="addUser" class="btn btn-green">
+          <button type="button" id="addUser" class="btn btn-green">
             <i class="fa-solid fa-plus"></i>
           </button>
-          <button id="play" class="btn btn-red">
+          <button type="button" id="play" class="btn btn-red">
             <i class="fa-solid fa-play"></i>
           </button>
-          <button id="reset" class="btn btn-green">
+          <button type="button" id="reset" class="btn btn-green">
             <i class="fa-solid fa-arrow-rotate-left"></i>
           </button>
-          <button id="stop" class="btn btn-red">
+          <button type="button" id="stop" class="btn btn-red">
             <i class="fa-solid fa-stop"></i>
           </button>
         </div>

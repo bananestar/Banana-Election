@@ -3,41 +3,6 @@
  *
  * Copyright (c) 2022 Simon Vander Linden
  */
-
-/* :root {
-  --color-main: white;
-}
-
-body {
-  margin: 0;
-  box-sizing: border-box;
-  background: no-repeat url("../img/cinema.jpg");
-  background-size: cover;
-}
-
-.container {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  color: var(--color-main);
-  background: rgba(0, 0, 0, 0.5);
-}
-
-.box {
-  text-align: center;
-}
-
-.btnUser{
-  border: solid 1px black;
-}
-
-.btnFlash{
-  color: black;
-  background-color: white;
-} */
-
 body {
   margin: 0px;
   background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.48)), url("../img/cinema.jpg");
@@ -121,6 +86,7 @@ h4 {
 
 .content {
   padding: 2px 16px;
+  text-align: center;
 }
 
 /*Color for animation random*/
@@ -136,12 +102,6 @@ h4 {
   font-size: 50px;
   font-weight: bold;
   background-color: green;
-}
-
-#addUser:hover{
-  cursor: pointer;
-  background-color: gold;
-  box-shadow: 0px 0px 5px gold;
 }
 
 #btnGroupe {
@@ -168,6 +128,8 @@ h4 {
   border-radius: 5px;
 }
 
+
+
 .btn-red{
   background-color: red;
 }
@@ -181,6 +143,12 @@ h4 {
 
 .btn-green{
   background-color: green;
+}
+
+.btn-green:hover{
+  cursor: pointer;
+  background-color: gold;
+  box-shadow: 0px 0px 5px gold;
 }
 
 /*animation*/
@@ -201,4 +169,28 @@ h4 {
 @keyframes run {
   0% {left: 101vw;}
   100% {left: -50vw;}
+}
+
+/* classement */
+
+#btnGroupeGameSelect{
+  text-align: center;
+}
+
+#btnGroupeGameSelect > button {
+  font-size: 25px;
+  padding: 10px;
+  margin-top: 10px;
+  min-width: 100px;
+  color: black;
+}
+
+.catchUserMulti{
+  background-color: rgb(113, 108, 80);
+  box-shadow: 0px 0px 10px rgb(113, 108, 80);
+  transition: 0.3s;
+}
+
+#messageWarning{
+  background-color: rgba(255, 0, 0, 0.6);
 }
